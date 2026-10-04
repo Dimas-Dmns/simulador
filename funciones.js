@@ -72,6 +72,11 @@ function calcularCuotaMensual(total, plazoAnios) {
     let cuota = calcularCuotaMensual(total, plazo);
     document.getElementById("spnCuotaMensual").textContent = "USD " + cuota.toFixed(2);
 
+function aprobarCredito(capacidadPago, cuotaMensual) {
+    return capacidadPago > cuotaMensual;
+}
+
+
 
 
 
