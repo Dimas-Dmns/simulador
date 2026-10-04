@@ -2,8 +2,8 @@
 
 function calcular() {
     // Leer ingresos y egresos
-    let ingresos = parseFloat(document.getElementById("txtIngresos").value);
-    let egresos = parseFloat(document.getElementById("txtEgresos").value);
+    let ingresos = parseFloat(document.getElementById("txtIngresos").value) || 0;
+    let egresos = parseFloat(document.getElementById("txtEgresos").value) || 0;
 
     // Disponible
     let disponible = calcularDisponible(ingresos, egresos);
@@ -14,9 +14,9 @@ function calcular() {
     document.getElementById("spnCapacidadPago").textContent = "USD " + capacidad.toFixed(2);
 
     // Leer datos del crédito
-    let monto = parseFloat(document.getElementById("txtMonto").value);
-    let plazo = parseFloat(document.getElementById("txtPlazo").value);
-    let tasa = parseFloat(document.getElementById("txtTasaInteres").value);
+    let monto = parseFloat(document.getElementById("txtMonto").value) || 0;
+    let plazo = parseFloat(document.getElementById("txtPlazo").value) || 0;
+    let tasa = parseFloat(document.getElementById("txtTasaInteres").value) || 0;
 
     // Interés
     let interes = calcularInteresSimple(monto, tasa, plazo);
@@ -42,5 +42,25 @@ function calcular() {
     }
 }
 
-// Conectar el botón
+// Función para limpiar todo (botón Reiniciar)
+function reiniciar() {
+    // Limpiar los inputs
+    document.getElementById("txtIngresos").value = "";
+    document.getElementById("txtEgresos").value = "";
+    document.getElementById("txtMonto").value = "";
+    document.getElementById("txtPlazo").value = "";
+    document.getElementById("txtTasaInteres").value = "";
+
+    // Limpiar los resultados
+    document.getElementById("spnDisponible").textContent = "";
+    document.getElementById("spnCapacidadPago").textContent = "";
+    document.getElementById("spnInteresPagar").textContent = "";
+    document.getElementById("spnTotalPrestamo").textContent = "";
+    document.getElementById("spnCuotaMensual").textContent = "";
+    document.getElementById("spnEstadoCredito").textContent = "ANALIZANDO...";
+    document.getElementById("spnEstadoCredito").style.color = "#2c3e50";
+}
+
+// Conectar los botones
 document.getElementById("btnCalcularCredito").addEventListener("click", calcular);
+document.getElementById("btnReiniciar").addEventListener("click", reiniciar);

@@ -17,7 +17,7 @@ function calcularInteresSimple(monto, tasa, plazoAnios) {
 }
 
 function calcularTotalPagar(monto, interes) {
-    return monto + interes + 100;
+    return monto + interes + 100; // +100 de impuestos y SOLCA
 }
 
 function calcularCuotaMensual(total, plazoAnios) {
