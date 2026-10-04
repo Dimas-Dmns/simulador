@@ -28,3 +28,17 @@ function calcularCapacidadPago(montoDisponible) {
     return montoDisponible * 0.5;   // 50% del disponible
 }
 
+function calcular() {
+    // Leer ingresos y egresos
+    let ingresos = parseFloat(document.getElementById("txtIngresos").value);
+    let egresos = parseFloat(document.getElementById("txtEgresos").value);
+
+    // Calcular disponible
+    let disponible = calcularDisponible(ingresos, egresos);
+    document.getElementById("spnDisponible").textContent = "USD " + disponible.toFixed(2);
+
+    // Calcular capacidad de pago
+    let capacidad = calcularCapacidadPago(disponible);
+    document.getElementById("spnCapacidadPago").textContent = "USD " + capacidad.toFixed(2);
+}
+
