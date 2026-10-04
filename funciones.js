@@ -23,3 +23,8 @@ function calcular() {
 
 // Conectar el botón
 document.getElementById("btnCalcularCredito").addEventListener("click", calcular);
+
+function calcularCapacidadPago(montoDisponible) {
+    return montoDisponible * 0.5;   // 50% del disponible
+}
+
