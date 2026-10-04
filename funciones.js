@@ -68,4 +68,10 @@ function calcularCuotaMensual(total, plazoAnios) {
     return total / meses;
 }
 
+    // Calcular cuota mensual
+    let cuota = calcularCuotaMensual(total, plazo);
+    document.getElementById("spnCuotaMensual").textContent = "USD " + cuota.toFixed(2);
+
+
+
 
