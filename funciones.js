@@ -42,3 +42,8 @@ function calcular() {
     document.getElementById("spnCapacidadPago").textContent = "USD " + capacidad.toFixed(2);
 }
 
+function calcularInteresSimple(monto, tasa, plazoAnios) {
+    return plazoAnios * monto * (tasa / 100);
+}
+
+
