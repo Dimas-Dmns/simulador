@@ -76,6 +76,19 @@ function aprobarCredito(capacidadPago, cuotaMensual) {
     return capacidadPago > cuotaMensual;
 }
 
+    // Aprobar o rechazar el crédito
+    let aprobado = aprobarCredito(capacidad, cuota);
+
+    if (aprobado) {
+        document.getElementById("spnEstadoCredito").textContent = "CREDITO APROBADO";
+        document.getElementById("spnEstadoCredito").style.color = "green";
+    } else {
+        document.getElementById("spnEstadoCredito").textContent = "CREDITO RECHAZADO";
+        document.getElementById("spnEstadoCredito").style.color = "red";
+    }
+
+    
+
 
 
 
