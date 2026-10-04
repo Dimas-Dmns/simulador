@@ -59,4 +59,8 @@ function calcularTotalPagar(monto, interes) {
     return monto + interes + 100;   // +100 de impuestos y SOLCA
 }
 
+    // Calcular total a pagar
+    let total = calcularTotalPagar(monto, interes);
+    document.getElementById("spnTotalPrestamo").textContent = "USD " + total.toFixed(2);
+
 
