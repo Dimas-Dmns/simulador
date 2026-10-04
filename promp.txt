@@ -1,0 +1,10 @@
+Actúa como un diseñador UI/UX senior y desarrollador frontend 
+ Mejora visualmente mi simulador de crédito actual, sin cambiar la lógica de los cálculos que ya funciona. 
+ Dale un aspecto empresarial profesional inspirado en Banco Pichincha Ecuador: Usa estos 5 colores exactos como base: - Morado Quin Fuchsia:#6E3660 - Marrón Raw Sienna Deep:#6B5A3E - Verde Phthalo Green:#2F5D62 · Azul Cerulean Blue:#4A5F7A - Gris Burnt Sienna:#4A3C3A Y como color de fondo usa un blanco hueso #F8F6F3 con textura de papel acuarela suave. 
+ El color principal para botones y header debe ser el azul #4A5F7A, el secundario para hover y acentos el morado #6E3660. Haz que se vea artistico, minimalista, con bordes redondeados, sombras suaves y tipografia serif elegante para los titulos. 
+ Que toda la Ul se inspire en la luna tipografia limpia, tarjetas con sombras suaves y logo. Hazlo 1OO% responsive para móvil y desktop. 
+ Agrega: 
+ 1. Header con logo
+ 2. Formulario en una card a la izquierda
+ 3. Resultados con cuota mensual,total a pagar e interés total en una card a la derecha
+ 4. Tabla de amortización bonita. Usa iconos lucide. El código debe quedar en HTML, CSS y JS separados y limpios

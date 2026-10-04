@@ -32,35 +32,83 @@ function calcular() {
 
     // Aprobar o rechazar
     let aprobado = aprobarCredito(capacidad, cuota);
+    let statusBox = document.getElementById("statusBox");
+    let spnEstado = document.getElementById("spnEstadoCredito");
 
     if (aprobado) {
-        document.getElementById("spnEstadoCredito").textContent = "CREDITO APROBADO";
-        document.getElementById("spnEstadoCredito").style.color = "green";
+        spnEstado.textContent = "✓ CRÉDITO APROBADO";
+        statusBox.className = "status-box aprobado";
     } else {
-        document.getElementById("spnEstadoCredito").textContent = "CREDITO RECHAZADO";
-        document.getElementById("spnEstadoCredito").style.color = "red";
+        spnEstado.textContent = "✗ CRÉDITO RECHAZADO";
+        statusBox.className = "status-box rechazado";
+    }
+
+    // Generar tabla de amortización
+    generarTablaAmortizacion(monto, interes, plazo, cuota);
+}
+
+function generarTablaAmortizacion(monto, interesTotal, plazoAnios, cuotaMensual) {
+    let tbody = document.getElementById("tbodyAmortizacion");
+    tbody.innerHTML = "";
+
+    if (plazoAnios <= 0 || monto <= 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-table">Ingresa datos válidos</td></tr>';
+        return;
+    }
+
+    let meses = plazoAnios * 12;
+    let capitalMensual = monto / meses;
+    let interesMensual = interesTotal / meses;
+    let saldo = monto;
+
+    // Mostrar máximo 24 cuotas para no saturar (si es más, se resume)
+    let mostrar = Math.min(meses, 24);
+
+    for (let i = 1; i <= mostrar; i++) {
+        saldo -= capitalMensual;
+        if (saldo < 0) saldo = 0;
+
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${i}</td>
+            <td>USD ${cuotaMensual.toFixed(2)}</td>
+            <td>USD ${capitalMensual.toFixed(2)}</td>
+            <td>USD ${interesMensual.toFixed(2)}</td>
+            <td>USD ${saldo.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+    }
+
+    if (meses > 24) {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="5" class="empty-table">... y ${meses - 24} cuotas más</td>`;
+        tbody.appendChild(tr);
     }
 }
 
-// Función para limpiar todo (botón Reiniciar)
 function reiniciar() {
-    // Limpiar los inputs
+    // Limpiar inputs
     document.getElementById("txtIngresos").value = "";
     document.getElementById("txtEgresos").value = "";
     document.getElementById("txtMonto").value = "";
     document.getElementById("txtPlazo").value = "";
     document.getElementById("txtTasaInteres").value = "";
 
-    // Limpiar los resultados
-    document.getElementById("spnDisponible").textContent = "";
-    document.getElementById("spnCapacidadPago").textContent = "";
-    document.getElementById("spnInteresPagar").textContent = "";
-    document.getElementById("spnTotalPrestamo").textContent = "";
-    document.getElementById("spnCuotaMensual").textContent = "";
+    // Limpiar resultados
+    document.getElementById("spnDisponible").textContent = "—";
+    document.getElementById("spnCapacidadPago").textContent = "—";
+    document.getElementById("spnInteresPagar").textContent = "—";
+    document.getElementById("spnTotalPrestamo").textContent = "—";
+    document.getElementById("spnCuotaMensual").textContent = "—";
     document.getElementById("spnEstadoCredito").textContent = "ANALIZANDO...";
-    document.getElementById("spnEstadoCredito").style.color = "#2c3e50";
+    
+    document.getElementById("statusBox").className = "status-box";
+
+    // Limpiar tabla
+    document.getElementById("tbodyAmortizacion").innerHTML = 
+        '<tr><td colspan="5" class="empty-table">Presiona "Calcular Crédito" para ver la tabla</td></tr>';
 }
 
-// Conectar los botones
+// Conectar botones
 document.getElementById("btnCalcularCredito").addEventListener("click", calcular);
 document.getElementById("btnReiniciar").addEventListener("click", reiniciar);

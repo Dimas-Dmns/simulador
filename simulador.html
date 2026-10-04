@@ -3,46 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Crédito</title>
+    <title>Simulador de Crédito | Luna</title>
     <link rel="stylesheet" href="simulador.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tipografía elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="container">
-        <h1>Simulador de Crédito</h1>
-
-        <h2>Datos financieros</h2>
-        <label for="txtIngresos">Ingresos:</label>
-        <input type="text" id="txtIngresos">
-
-        <label for="txtEgresos">Egresos:</label>
-        <input type="text" id="txtEgresos">
-
-        <p>Disponible: <span id="spnDisponible"></span></p>
-        <p>Capacidad de pago mensual: <span id="spnCapacidadPago"></span></p>
-
-        <h2>Solicitud de crédito</h2>
-        <label for="txtMonto">Monto:</label>
-        <input type="text" id="txtMonto">
-
-        <label for="txtPlazo">Plazo en años:</label>
-        <input type="text" id="txtPlazo">
-
-        <label for="txtTasaInteres">Tasa de interés:</label>
-        <input type="text" id="txtTasaInteres">
-
-        <p>Interés a pagar: <span id="spnInteresPagar"></span></p>
-        <p>Total préstamo: <span id="spnTotalPrestamo"></span></p>
-        <p>Cuota mensual: <span id="spnCuotaMensual"></span></p>
-        <p>Estado de crédito: <span id="spnEstadoCredito">ANALIZANDO...</span></p>
-
-        <div class="buttons">
-            <button id="btnCalcularCredito">Calcular Crédito</button>
-            <button id="btnReiniciar">Reiniciar</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="landmark"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="bank-name">Luna</span>
+                    <span class="bank-tagline">Simulador de Crédito</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="secure-badge">
+                    <i data-lucide="shield-check"></i> Seguro
+                </span>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Columna izquierda: Formulario -->
+        <section class="card form-card">
+            <div class="card-header">
+                <i data-lucide="clipboard-list"></i>
+                <h2>Datos del Cliente</h2>
+            </div>
+
+            <div class="form-section">
+                <h3><i data-lucide="wallet"></i> Situación Financiera</h3>
+                
+                <div class="input-group">
+                    <label for="txtIngresos">Ingresos mensuales (USD)</label>
+                    <input type="number" id="txtIngresos" placeholder="Ej: 1500" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="txtEgresos">Egresos mensuales (USD)</label>
+                    <input type="number" id="txtEgresos" placeholder="Ej: 800" step="0.01">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><i data-lucide="hand-coins"></i> Solicitud de Crédito</h3>
+                
+                <div class="input-group">
+                    <label for="txtMonto">Monto solicitado (USD)</label>
+                    <input type="number" id="txtMonto" placeholder="Ej: 5000" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="txtPlazo">Plazo (años)</label>
+                    <input type="number" id="txtPlazo" placeholder="Ej: 2" min="1">
+                </div>
+
+                <div class="input-group">
+                    <label for="txtTasaInteres">Tasa de interés anual (%)</label>
+                    <input type="number" id="txtTasaInteres" placeholder="Ej: 12" step="0.01">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="btnCalcularCredito" class="btn btn-primary">
+                    <i data-lucide="calculator"></i> Calcular Crédito
+                </button>
+                <button id="btnReiniciar" class="btn btn-secondary">
+                    <i data-lucide="rotate-ccw"></i> Reiniciar
+                </button>
+            </div>
+        </section>
+
+        <!-- Columna derecha: Resultados -->
+        <section class="card results-card">
+            <div class="card-header">
+                <i data-lucide="bar-chart-3"></i>
+                <h2>Resultados del Análisis</h2>
+            </div>
+
+            <!-- Estado del crédito -->
+            <div class="status-box" id="statusBox">
+                <span id="spnEstadoCredito">ANALIZANDO...</span>
+            </div>
+
+            <!-- Resumen financiero -->
+            <div class="results-grid">
+                <div class="result-item">
+                    <span class="result-label">Disponible mensual</span>
+                    <span class="result-value" id="spnDisponible">—</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Capacidad de pago</span>
+                    <span class="result-value" id="spnCapacidadPago">—</span>
+                </div>
+            </div>
+
+            <!-- Resultados principales destacados -->
+            <div class="highlight-results">
+                <div class="highlight-item primary">
+                    <i data-lucide="calendar-days"></i>
+                    <div>
+                        <span class="highlight-label">Cuota Mensual</span>
+                        <span class="highlight-value" id="spnCuotaMensual">—</span>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <i data-lucide="circle-dollar-sign"></i>
+                    <div>
+                        <span class="highlight-label">Total a Pagar</span>
+                        <span class="highlight-value" id="spnTotalPrestamo">—</span>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <i data-lucide="percent"></i>
+                    <div>
+                        <span class="highlight-label">Interés Total</span>
+                        <span class="highlight-value" id="spnInteresPagar">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de amortización -->
+            <div class="amortization-section">
+                <h3><i data-lucide="table"></i> Tabla de Amortización</h3>
+                <div class="table-wrapper">
+                    <table id="tablaAmortizacion">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cuota</th>
+                                <th>Capital</th>
+                                <th>Interés</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyAmortizacion">
+                            <tr>
+                                <td colspan="5" class="empty-table">Presiona "Calcular Crédito" para ver la tabla</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Luna · Simulador educativo ·</p>
+    </footer>
 
     <script src="funciones.js"></script>
     <script src="simulador.js"></script>
+    <script>
+        // Inicializar iconos Lucide
+        lucide.createIcons();
+    </script>
 </body>
 </html>
