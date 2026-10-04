@@ -55,4 +55,8 @@ function calcularInteresSimple(monto, tasa, plazoAnios) {
     let interes = calcularInteresSimple(monto, tasa, plazo);
     document.getElementById("spnInteresPagar").textContent = "USD " + interes.toFixed(2);
 
+function calcularTotalPagar(monto, interes) {
+    return monto + interes + 100;   // +100 de impuestos y SOLCA
+}
+
 
