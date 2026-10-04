@@ -46,4 +46,13 @@ function calcularInteresSimple(monto, tasa, plazoAnios) {
     return plazoAnios * monto * (tasa / 100);
 }
 
+    // Leer monto, plazo y tasa
+    let monto = parseFloat(document.getElementById("txtMonto").value);
+    let plazo = parseFloat(document.getElementById("txtPlazo").value);
+    let tasa = parseFloat(document.getElementById("txtTasaInteres").value);
+
+    // Calcular interés
+    let interes = calcularInteresSimple(monto, tasa, plazo);
+    document.getElementById("spnInteresPagar").textContent = "USD " + interes.toFixed(2);
+
 
