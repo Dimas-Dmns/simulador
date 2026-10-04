@@ -63,4 +63,9 @@ function calcularTotalPagar(monto, interes) {
     let total = calcularTotalPagar(monto, interes);
     document.getElementById("spnTotalPrestamo").textContent = "USD " + total.toFixed(2);
 
+function calcularCuotaMensual(total, plazoAnios) {
+    let meses = plazoAnios * 12;
+    return total / meses;
+}
+
 
